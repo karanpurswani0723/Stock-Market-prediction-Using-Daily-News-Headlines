@@ -1,13 +1,6 @@
 """
 Title: Stock market prediction using news headlines
 
-Authors:
-Date: 05/06/2018
-Shravan Chintha - Role: Cleaning dataset, created relevant visualizations, computed baseline model, implemented TFIDF for data. 
-Implemented Random forest, naive bayes models.
-Adithya Job - Role: Implemented sentiment analysis, bigram and tri gram models with machine learning models such as gradient boosting,
-XGboost model and evaluated the model performance.
-
 Introduction:
     
 The project is about predicting the stock market movement based on the news headlines
@@ -102,7 +95,6 @@ from sklearn.naive_bayes import MultinomialNB
 from textblob import TextBlob
 from xgboost import XGBClassifier
 
-#author: Adithya Job
 def analize_sentiment(tweet):
     
     analysis = TextBlob((str(tweet)))     #defining the function which will find the plority of a sentence
@@ -145,8 +137,7 @@ coeffdf = coeffdf.sort_values(['Coefficient', 'Word'], ascending=[0, 1])
 print("Top ten words according to the baseline model",coeffdf.head(10))
 print("Last ten words according to the baseline model",coeffdf.tail(10))
 
-#author: Shravan Chintha
-#bi-gram 
+
 
 nvectorize = TfidfVectorizer(min_df=0.05, max_df=0.85,ngram_range=(2,2)) # DEFINING THE TFID TRANSFORMATION FUNCTION
 news_nvector = nvectorize.fit_transform(train_news_list)
@@ -174,8 +165,6 @@ ncoeffdf = ncoeffdf.sort_values(['Coefficient', 'Word'], ascending=[0, 1])
 ncoeffdf.head(10)
 ncoeffdf.tail(10)
 
-#author: Shravan Chintha
-#random forest - bigram
 
 nvectorize = TfidfVectorizer(min_df=0.01, max_df=0.95,ngram_range=(2,2))
 news_nvector = nvectorize.fit_transform(train_news_list)
@@ -191,8 +180,7 @@ rfpredictions = rfmodel.predict(ntest_vector)
 accuracyrf = accuracy_score(test_news['Label'], rfpredictions)
 print("Random forest with tfid and bigram", accuracyrf)
 
-#author: Shravan Chintha
-#Naive Bayes
+
 
 nvectorize = TfidfVectorizer(min_df=0.05, max_df=0.8,ngram_range=(2,2)) #DEFINING THE NAIVE BAYS MODEL
 news_nvector = nvectorize.fit_transform(train_news_list)
@@ -228,8 +216,7 @@ print(" CONFUSION MATRIX OF THE GRADIANT BOOSTING ", confusion_matrix(test_news[
 
 print("Gradient Boosting accuracy: ",gbaccuracy)
 
-#author: Adithya Job
-#trigram
+
 
 n3vectorize = TfidfVectorizer(min_df=0.0004, max_df=0.115,ngram_range=(3,3)) # DEFINING THE TFID , TRIGRAM MODEL
 news_n3vector = n3vectorize.fit_transform(train_news_list)
@@ -257,8 +244,7 @@ n3coeffdf = n3coeffdf.sort_values(['Coefficient', 'Word'], ascending=[0, 1])
 print("trigram top ten word distibution", n3coeffdf.head(10))
 print("trigram last ten word distibution", n3coeffdf.tail(10))    # trigram model word distribution 
 
-#author: Adithya Job
-### sentiment analysis
+
 
 train_sentiment=train_news
 test_sentiment = test_news
